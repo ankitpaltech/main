@@ -1,0 +1,45 @@
+import tkinter as tk
+
+import requests
+import datetime
+from tkinter import font
+from requests import api
+def getdata2():
+ symbol = textfield.get()
+ apii = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + symbol +'&apikey=51FVV10PUS4OH6WS'
+ rr = requests.get(apii).json()
+ exchange11 = rr["Global Quote"]["01. symbol"]
+ exchange22 = rr["Global Quote"]["02. open"]
+ exchange33 = rr["Global Quote"]["03. high"]
+ exchange44 = rr["Global Quote"]["04. low"]
+ exchange55 = rr["Global Quote"]["05. price"]
+ exchange66 = rr["Global Quote"]["06. volume"]
+ label.config(text= "Symbol :\n" + exchange11
+ + "\n open : " +exchange22
+ + "\n high : " +exchange33
+ + "\n low : " +exchange44
+ + "\n price : " + exchange55
+ + "\n volume : " + exchange66
+  )
+
+  
+canvas = tk.Tk()
+canvas.geometry("800x800")
+canvas.title("TRADOLOGY")
+t = ("poppons", 35, "bold")
+
+textfield = tk.Entry(canvas, font = t)
+textfield.pack(pady=20)
+textfield.focus()
+textfield.bind('<Return>', getdata2)
+
+ff = ("poppins", 15 , "bold")
+button1 = tk.Button(canvas, font = ff,text = "load", command=getdata2)
+button1.pack(pady = 20)
+label = tk.Label(canvas, font = ff)
+label.pack(pady = 20)
+
+
+
+
+canvas.mainloop()
